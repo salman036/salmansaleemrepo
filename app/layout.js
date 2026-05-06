@@ -24,6 +24,9 @@ export const metadata = {
   description:
     'Software Engineer with 5+ years in front-end & mobile development. React.js, React Native, Next.js specialist.',
   keywords: ['Salman Saleem', 'Software Engineer', 'React.js', 'React Native', 'Next.js', 'Frontend Developer'],
+  icons: {
+    icon: '/icon.svg',
+  },
   openGraph: {
     title: 'Salman Saleem — Software Engineer',
     description: 'Front-End & Mobile Development specialist from Lahore, Pakistan.',

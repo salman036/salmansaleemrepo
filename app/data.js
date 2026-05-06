@@ -16,7 +16,7 @@ export const skills = {
   'UI Frameworks': ['Tailwind CSS', 'MUI', 'Bootstrap', 'Ant Design'],
   'Tools & Infra': ['Git', 'GitHub', 'Android Studio', 'Beanstalk', 'Laravel'],
   'Testing & QA': ['Selenium', 'Postman', 'Swagger'],
-  'Backend Touch': ['Flask', 'Laravel', 'Python', 'jQuery'],
+  'Backend Touch': ['Flask', 'Laravel', 'jQuery'],
 }
 
 export const experience = [
@@ -74,18 +74,6 @@ export const experience = [
     highlights: [
       'Developed UIs with React.js, Bootstrap, and SASS; integrated REST APIs.',
       'Collaborated with BA teams for requirements, improving delivery accuracy.',
-    ],
-  },
-  {
-    role: 'Jr. Python Developer',
-    company: 'Southville Solutions',
-    period: '2019 – 2020',
-    location: 'Lahore',
-    type: 'Full-Time',
-    description: '',
-    highlights: [
-      'Built REST APIs with Flask, documented in Swagger, and tested in Postman.',
-      'Contributed to front-end using JS, jQuery, and Bootstrap.',
     ],
   },
 ]
