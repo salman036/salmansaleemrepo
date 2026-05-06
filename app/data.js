@@ -21,6 +21,24 @@ export const skills = {
 
 export const experience = [
   {
+    role: 'Senior React.js Developer',
+    company: 'Innovative Saudia',
+    period: 'Jan 2026 – Present',
+    location: 'Lahore, Pakistan',
+    type: 'Full-Time',
+    description: 'Full-scale healthcare platform — Hospital Information System (HIS).',
+    highlights: [
+      'Architected and led frontend development of a full-scale HIS in React.js + TypeScript covering org/center setup, service management, and patient workflows.',
+      'Implemented Redux Toolkit middleware for complex async side effects — authentication sequences, API orchestration, session lifecycle, and multi-step form flows.',
+      'Leveraged Context API for lightweight, scoped state across localization, theme configuration, and user-preference modules.',
+      'Engineered a multi-tenant RBAC system with permission-scoped UI rendering across hospital entities and user roles.',
+      'Designed a localization architecture supporting runtime language switching and locale-aware formatting for international deployment.',
+      'Built session management with idle-timeout detection, activity tracking, and secure token refresh.',
+      'Developed an app version management module for safe, incremental feature rollouts.',
+      'Enforced TypeScript strict-mode, ESLint, Prettier, Husky pre-commit hooks; mentored junior engineers via structured code reviews.',
+    ],
+  },
+  {
     role: 'Software Engineer',
     company: 'First Travel Company',
     period: '2022 – Present',
@@ -73,6 +91,17 @@ export const experience = [
 ]
 
 export const projects = [
+    {
+    name: 'HIS — Hospital Information System',
+    subtitle: 'Innovative Saudia · Senior React.js Developer',
+    description:
+      'Full-scale healthcare platform covering org/center setup, service management, physician scheduling, patient workflows, multi-tenant RBAC, runtime localization, and session & activity management. Built from scratch with React.js + TypeScript.',
+    tech: ['React.js', 'TypeScript', 'Redux Toolkit', 'Context API', 'RBAC', 'REST APIs'],
+    category: 'SaaS',
+    featured: true,
+    url: null,
+  },
+
   {
     name: 'Reversal.com',
     subtitle: 'Booking App',
@@ -164,6 +193,6 @@ export const education = {
 export const stats = [
   { value: '5+', label: 'Years Experience' },
   { value: '10+', label: 'Projects Shipped' },
-  { value: '4', label: 'Companies' },
+  { value: '5', label: 'Companies' },
   { value: '30%', label: 'Efficiency Boost' },
 ]
