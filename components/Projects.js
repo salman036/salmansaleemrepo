@@ -113,21 +113,7 @@ export default function Projects() {
           </h2>
 
           {/* Filter */}
-          <div className="flex flex-wrap gap-2 animate-on-scroll">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-md border transition-all duration-200 ${
-                  filter === cat
-                    ? 'bg-accent border-accent text-white'
-                    : 'border-border text-muted hover:border-accent/40 hover:text-paper'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
