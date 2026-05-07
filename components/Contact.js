@@ -21,7 +21,7 @@ export default function Contact() {
   }, [])
 
   return (
-    <section id="contact" ref={ref} className="py-32 relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-28 relative overflow-hidden">
       {/* Big background text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <span className="font-display font-black text-[20vw] text-border/20 whitespace-nowrap leading-none">
@@ -35,13 +35,13 @@ export default function Contact() {
             <span className="section-tag">// Let's Talk</span>
           </div>
           <h2 className="heading-lg mb-6 animate-on-scroll">
-            Have a Project?
+            Need a front-end engineer?
             <br />
-            <span className="text-gradient">Let's Build It.</span>
+            <span className="text-gradient">Let's talk.</span>
           </h2>
           <p className="text-muted text-lg leading-relaxed mb-12 animate-on-scroll">
-            I'm currently open to new opportunities. Whether you need a senior front-end engineer,
-            a mobile developer, or a team lead — let's connect.
+            I'm open to senior front-end, React Native, and product engineering roles where clear
+            UI, reliable architecture, and thoughtful execution matter.
           </p>
 
           {/* Contact Options */}
@@ -50,7 +50,7 @@ export default function Contact() {
               href={`mailto:${personalInfo.email}`}
               className="card-base hover:border-accent/40 flex flex-col items-center gap-3 text-center group transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+              <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" strokeWidth="2">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
@@ -70,7 +70,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="card-base hover:border-accent/40 flex flex-col items-center gap-3 text-center group transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+              <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" strokeWidth="2">
                   <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
                   <rect x="2" y="9" width="4" height="12" />
@@ -86,7 +86,7 @@ export default function Contact() {
             </a>
 
             <div className="card-base flex flex-col items-center gap-3 text-center">
-              <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" strokeWidth="2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                   <circle cx="12" cy="10" r="3" />

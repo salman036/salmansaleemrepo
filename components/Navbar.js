@@ -29,7 +29,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="font-display font-black text-lg tracking-tight">
+        <a href="#" className="font-display font-black text-lg">
           <span className="text-paper">SS</span>
           <span className="text-accent">.</span>
         </a>
@@ -41,10 +41,7 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="btn-primary text-xs py-2 px-4"
-          >
+          <a href={`mailto:${personalInfo.email}`} className="btn-primary text-xs py-2 px-4">
             Hire Me
           </a>
         </div>

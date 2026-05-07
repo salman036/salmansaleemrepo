@@ -13,14 +13,14 @@ const categoryColors = {
 function ProjectCard({ project, featured = false }) {
   return (
     <div
-      className={`project-card card-base group hover:border-accent/40 cursor-default ${
-        featured ? 'md:col-span-1' : ''
+      className={`project-card card-base group hover:border-accent/40 cursor-default h-full flex flex-col ${
+        featured ? 'bg-surface-soft/90' : ''
       }`}
     >
       <div className="flex items-start justify-between mb-4">
         <div>
           <span
-            className={`font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded border ${
+            className={`font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-md border ${
               categoryColors[project.category] || 'text-muted bg-muted/10 border-muted/20'
             }`}
           >
@@ -50,15 +50,24 @@ function ProjectCard({ project, featured = false }) {
         )}
       </div>
 
-      <h3 className="font-display font-black text-xl text-paper mb-1 group-hover:text-accent transition-colors duration-200">
+      <h3 className={`${featured ? 'text-2xl' : 'text-xl'} font-display font-black text-paper mb-1 group-hover:text-accent transition-colors duration-200`}>
         {project.name}
       </h3>
       <p className="font-mono text-xs text-muted mb-3">{project.subtitle}</p>
       <p className="text-muted text-sm leading-relaxed mb-5">{project.description}</p>
 
+      {project.impact && (
+        <div className="mb-5 border-l border-accent/50 pl-4">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-1">
+            Outcome
+          </p>
+          <p className="text-sm text-paper/90 leading-relaxed">{project.impact}</p>
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-2 mt-auto">
         {project.tech.map((t) => (
-          <span key={t} className="font-mono text-[11px] px-2 py-0.5 rounded bg-border text-muted">
+          <span key={t} className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-border text-muted">
             {t}
           </span>
         ))}
@@ -91,16 +100,16 @@ export default function Projects() {
   }, [])
 
   return (
-    <section id="projects" ref={ref} className="py-32 relative">
+    <section id="projects" ref={ref} className="py-28 relative">
       <div className="max-w-6xl mx-auto px-6">
         <div className="animate-on-scroll">
           <span className="section-tag">// Projects</span>
         </div>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <h2 className="heading-lg animate-on-scroll">
-            Selected
+            Selected work,
             <br />
-            <span className="text-gradient">Work</span>
+            <span className="text-gradient">built for real users.</span>
           </h2>
 
           {/* Filter */}
@@ -109,7 +118,7 @@ export default function Projects() {
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-md border transition-all duration-200 ${
                   filter === cat
                     ? 'bg-accent border-accent text-white'
                     : 'border-border text-muted hover:border-accent/40 hover:text-paper'
@@ -125,10 +134,10 @@ export default function Projects() {
           {filtered.map((project, i) => (
             <div
               key={project.name}
-              className="animate-on-scroll"
+              className={`animate-on-scroll ${filter === 'All' && project.featured && i < 2 ? 'lg:col-span-2' : ''}`}
               style={{ transitionDelay: `${i * 0.07}s` }}
             >
-              <ProjectCard project={project} />
+              <ProjectCard project={project} featured={filter === 'All' && project.featured && i < 2} />
             </div>
           ))}
         </div>

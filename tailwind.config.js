@@ -14,12 +14,13 @@ module.exports = {
       },
       colors: {
         ink: '#0a0a0f',
-        paper: '#f5f3ee',
+        paper: '#f7f5f0',
         accent: '#ff4d00',
         gold: '#c9a84c',
-        muted: '#6b6b7a',
-        surface: '#13131a',
-        border: '#1e1e2a',
+        muted: '#9a99a8',
+        surface: '#121218',
+        'surface-soft': '#17171f',
+        border: '#282832',
       },
       animation: {
         'fade-up': 'fadeUp 0.7s ease forwards',

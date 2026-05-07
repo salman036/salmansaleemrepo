@@ -4,12 +4,13 @@
 
 :root {
   --ink: #0a0a0f;
-  --paper: #f5f3ee;
+  --paper: #f7f5f0;
   --accent: #ff4d00;
   --gold: #c9a84c;
-  --muted: #6b6b7a;
-  --surface: #13131a;
-  --border: #1e1e2a;
+  --muted: #9a99a8;
+  --surface: #121218;
+  --surface-soft: #17171f;
+  --border: #282832;
 }
 
 * {
@@ -24,6 +25,9 @@ body {
   background-color: var(--ink);
   color: var(--paper);
   overflow-x: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(255, 77, 0, 0.05), transparent 420px),
+    radial-gradient(circle at 80% 10%, rgba(201, 168, 76, 0.08), transparent 280px);
 }
 
 /* Scrollbar */
@@ -57,15 +61,15 @@ body::before {
 
 @layer components {
   .section-tag {
-    @apply font-mono text-xs uppercase tracking-widest text-accent mb-3 inline-block;
+    @apply font-mono text-xs uppercase tracking-[0.22em] text-accent mb-3 inline-block;
   }
 
   .heading-xl {
-    @apply font-display text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight;
+    @apply font-display text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9];
   }
 
   .heading-lg {
-    @apply font-display text-3xl md:text-5xl font-black leading-tight tracking-tight;
+    @apply font-display text-3xl md:text-5xl font-black leading-tight;
   }
 
   .heading-md {
@@ -73,19 +77,19 @@ body::before {
   }
 
   .card-base {
-    @apply bg-surface border border-border rounded-2xl p-6 transition-all duration-300;
+    @apply bg-surface/90 border border-border rounded-lg p-6 transition-all duration-300 shadow-[0_18px_60px_rgba(0,0,0,0.18)];
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 bg-accent text-white font-display font-bold px-6 py-3 rounded-full text-sm uppercase tracking-widest transition-all duration-200 hover:bg-orange-400 hover:scale-105 active:scale-95;
+    @apply inline-flex items-center justify-center gap-2 bg-accent text-white font-display font-bold px-5 py-3 rounded-lg text-sm uppercase tracking-widest transition-all duration-200 hover:bg-orange-400 hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 border border-border text-paper font-display font-bold px-6 py-3 rounded-full text-sm uppercase tracking-widest transition-all duration-200 hover:border-accent hover:text-accent;
+    @apply inline-flex items-center justify-center gap-2 border border-border bg-surface/60 text-paper font-display font-bold px-5 py-3 rounded-lg text-sm uppercase tracking-widest transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5;
   }
 
   .skill-pill {
-    @apply font-mono text-xs px-3 py-1.5 rounded-full border border-border text-muted transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 cursor-default;
+    @apply font-mono text-xs px-3 py-1.5 rounded-md border border-border text-muted transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 cursor-default;
   }
 
   .nav-link {
@@ -107,9 +111,9 @@ body::before {
 
 /* Cursor glow */
 .glow-dot {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(255,77,0,0.08) 0%, transparent 70%);
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(255,77,0,0.075) 0%, transparent 70%);
   position: fixed;
   pointer-events: none;
   transform: translate(-50%, -50%);
@@ -124,7 +128,7 @@ body::before {
 
 /* Text gradient */
 .text-gradient {
-  background: linear-gradient(135deg, #ff4d00, #ff8c00);
+  background: linear-gradient(135deg, #ff4d00, #f0c766);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

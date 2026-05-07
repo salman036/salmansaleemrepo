@@ -21,7 +21,7 @@ export default function Experience() {
   }, [])
 
   return (
-    <section id="experience" ref={ref} className="py-32 relative">
+    <section id="experience" ref={ref} className="py-28 relative">
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/30 to-transparent" />
 
@@ -30,16 +30,16 @@ export default function Experience() {
           <span className="section-tag">// Experience</span>
         </div>
         <h2 className="heading-lg mb-16 animate-on-scroll">
-          Where I've
+          Experience with
           <br />
-          <span className="text-gradient">Worked</span>
+          <span className="text-gradient">delivery ownership.</span>
         </h2>
 
         <div className="relative">
           {/* Timeline line */}
           <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent via-border to-transparent" />
 
-          <div className="space-y-12">
+          <div className="space-y-8">
             {experience.map((job, i) => (
               <div
                 key={i}
@@ -62,20 +62,20 @@ export default function Experience() {
                       </h3>
                       <p className="font-display font-bold text-muted">{job.company}</p>
                     </div>
-                    <div className="flex-shrink-0 text-right">
+                    <div className="flex-shrink-0 sm:text-right">
                       <p className="font-mono text-xs text-accent">{job.period}</p>
                       <p className="font-mono text-xs text-muted">{job.location}</p>
                     </div>
                   </div>
 
                   {job.description && (
-                    <p className="text-muted text-sm mb-4 italic">{job.description}</p>
+                    <p className="text-muted text-sm mb-5">{job.description}</p>
                   )}
 
-                  <ul className="space-y-2">
+                  <ul className="grid md:grid-cols-2 gap-x-6 gap-y-3">
                     {job.highlights.map((item, j) => (
                       <li key={j} className="flex items-start gap-3 text-sm text-muted">
-                        <span className="text-accent mt-0.5 flex-shrink-0">▸</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}

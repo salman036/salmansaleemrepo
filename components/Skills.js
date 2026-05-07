@@ -60,7 +60,7 @@ export default function Skills() {
   }, [])
 
   return (
-    <section id="skills" ref={ref} className="py-32 relative">
+    <section id="skills" ref={ref} className="py-28 relative">
       {/* Decorative line */}
       <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-border to-transparent" />
 
@@ -69,9 +69,9 @@ export default function Skills() {
           <span className="section-tag">// Skills</span>
         </div>
         <h2 className="heading-lg mb-16 animate-on-scroll">
-          Technical
+          Practical technical
           <br />
-          <span className="text-gradient">Arsenal</span>
+          <span className="text-gradient">range.</span>
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
