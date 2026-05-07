@@ -86,16 +86,19 @@ export default function Projects() {
     filter === 'All' ? projects : projects.filter((p) => p.category === filter)
 
   useEffect(() => {
+    const elements = ref.current?.querySelectorAll('.animate-on-scroll')
+    if (!elements || elements.length === 0) return
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) entry.target.classList.add('visible')
-        })
+        }
       },
-      { threshold: 0.05 }
+      { threshold: 0.05, rootMargin: '0px 0px -10% 0px' }
     )
-    const elements = ref.current?.querySelectorAll('.animate-on-scroll')
-    elements?.forEach((el) => observer.observe(el))
+
+    elements.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [])
 

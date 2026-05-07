@@ -7,14 +7,30 @@ export default function Hero() {
   const glowRef = useRef(null)
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    // Use requestAnimationFrame to batch updates and write to transform (GPU) to avoid layout thrashing
+    let rafId = null
+    let targetX = 0
+    let targetY = 0
+
+    const update = () => {
       if (glowRef.current) {
-        glowRef.current.style.left = `${e.clientX}px`
-        glowRef.current.style.top = `${e.clientY}px`
+        // Use translate3d to avoid triggering layout
+        glowRef.current.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`
       }
+      rafId = null
     }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+
+    const handleMouseMove = (e) => {
+      targetX = e.clientX
+      targetY = e.clientY
+      if (rafId === null) rafId = requestAnimationFrame(update)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
   }, [])
 
   return (
