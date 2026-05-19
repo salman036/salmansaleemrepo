@@ -1,20 +1,38 @@
 import { personalInfo } from '../app/data'
+import { getInitials } from '../lib/scroll'
+
+const FOOTER_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const initials = getInitials(personalInfo.name)
+
   return (
-    <footer className="border-t border-border py-10">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="font-display font-black text-lg">
-          <span className="text-paper">SS</span>
-          <span className="text-accent">.</span>
-        </div>
-        <p className="font-mono text-xs text-muted text-center">
-          © {year} Salman Saleem · Built with Next.js & Tailwind
-        </p>
-        <div className="flex items-center gap-1 font-mono text-xs text-muted">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span>Available for hire</span>
+    <footer className="footer border-t border-theme-border py-10" aria-label="Footer">
+      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <a href="#hero" className="font-display font-bold text-lg">
+            <span className="text-theme-text">{initials}</span>
+            <span className="text-theme-accent">.</span>
+          </a>
+
+          <nav className="footer__nav flex flex-wrap justify-center gap-6" aria-label="Footer navigation">
+            {FOOTER_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="nav__link">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <p className="font-mono text-xs text-theme-muted text-center">
+            © {year} {personalInfo.name} · Built with Next.js
+          </p>
         </div>
       </div>
     </footer>

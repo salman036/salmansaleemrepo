@@ -4,47 +4,35 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body: ['DM Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains)', 'ui-monospace', 'monospace'],
+      },
+      spacing: {
+        'system-sm': 'var(--spacing-sm)',
+        'system-md': 'var(--spacing-md)',
+        'system-lg': 'var(--spacing-lg)',
+        'system-xl': 'var(--spacing-xl)',
       },
       colors: {
-        ink: '#0a0a0f',
-        paper: '#f7f5f0',
-        accent: '#ff4d00',
-        gold: '#c9a84c',
-        muted: '#9a99a8',
-        surface: '#121218',
-        'surface-soft': '#17171f',
-        border: '#282832',
+        theme: {
+          bg: 'var(--color-bg)',
+          elevated: 'var(--color-bg-elevated)',
+          surface: 'var(--color-surface)',
+          'surface-soft': 'var(--color-surface-soft)',
+          text: 'var(--color-text)',
+          muted: 'var(--color-text-muted)',
+          border: 'var(--color-border)',
+          accent: 'var(--color-accent)',
+        },
       },
-      animation: {
-        'fade-up': 'fadeUp 0.7s ease forwards',
-        'fade-in': 'fadeIn 0.5s ease forwards',
-        'slide-right': 'slideRight 0.6s ease forwards',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-      },
-      keyframes: {
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideRight: {
-          '0%': { opacity: '0', transform: 'translateX(-20px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 20px rgba(255,77,0,0.3)' },
-          '100%': { boxShadow: '0 0 40px rgba(255,77,0,0.6)' },
-        },
+      maxWidth: {
+        site: '90rem',
       },
     },
   },

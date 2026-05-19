@@ -2,88 +2,71 @@
 
 import { useEffect, useRef } from 'react'
 import { experience } from '../app/data'
+import { observeReveal } from '../lib/scroll'
 
 export default function Experience() {
   const ref = useRef(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible')
-        })
-      },
-      { threshold: 0.1 }
-    )
-    const elements = ref.current?.querySelectorAll('.animate-on-scroll')
-    elements?.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    return observeReveal(ref.current)
   }, [])
 
   return (
-    <section id="experience" ref={ref} className="py-28 relative">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/30 to-transparent" />
-
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="animate-on-scroll">
-          <span className="section-tag">// Experience</span>
-        </div>
-        <h2 className="heading-lg mb-16 animate-on-scroll">
-          Experience with
-          <br />
-          <span className="text-gradient">delivery ownership.</span>
+    <section id="experience" ref={ref} className="experience py-system-xl relative" aria-label="Experience">
+      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <span className="section-tag reveal">Experience</span>
+        <h2 className="heading-lg mb-14 reveal">
+          Career <span className="text-gradient">timeline</span>
         </h2>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent via-border to-transparent" />
+        <div className="experience__timeline relative">
+          <div className="timeline__line" aria-hidden />
 
-          <div className="space-y-8">
-            {experience.map((job, i) => (
-              <div
-                key={i}
-                className="relative pl-8 md:pl-24 animate-on-scroll"
-                style={{ transitionDelay: `${i * 0.1}s` }}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-[-4px] md:left-[28px] top-2 w-2 h-2 rounded-full bg-accent ring-4 ring-ink" />
+          <ol className="space-y-10 reveal-stagger list-none m-0 p-0">
+            {experience.map((job) => (
+              <li key={`${job.company}-${job.period}`} className="experience__item relative pl-8 md:pl-32 reveal">
+                <span
+                  className="absolute left-0 md:left-[7.25rem] top-6 w-3 h-3 rounded-full bg-theme-accent ring-4 ring-theme-bg"
+                  aria-hidden
+                />
 
-                {/* Year tag on desktop */}
-                <div className="hidden md:block absolute left-0 top-0 w-16 text-right">
-                  <span className="font-mono text-[10px] text-muted">{job.period.split('–')[0].trim()}</span>
+                <div className="hidden md:block absolute left-0 top-6 w-24 text-right pr-4">
+                  <time className="font-mono text-[11px] text-theme-muted">{job.period}</time>
                 </div>
 
-                <div className="card-base hover:border-accent/30 transition-all duration-300 group">
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
+                <article className="experience__card glass-card p-6 md:p-8">
+                  <header className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
                     <div>
-                      <h3 className="font-display font-black text-xl text-paper group-hover:text-accent transition-colors duration-200">
-                        {job.role}
-                      </h3>
-                      <p className="font-display font-bold text-muted">{job.company}</p>
+                      <h3 className="heading-md text-theme-text">{job.role}</h3>
+                      <p className="font-display font-semibold text-theme-muted">{job.company}</p>
                     </div>
-                    <div className="flex-shrink-0 sm:text-right">
-                      <p className="font-mono text-xs text-accent">{job.period}</p>
-                      <p className="font-mono text-xs text-muted">{job.location}</p>
+                    <div className="sm:text-right shrink-0">
+                      <p className="font-mono text-xs text-theme-accent md:hidden">{job.period}</p>
+                      <p className="font-mono text-xs text-theme-muted">{job.location}</p>
+                      {job.type ? (
+                        <span className="inline-block mt-1 font-mono text-[10px] uppercase tracking-wider text-theme-muted border border-theme-border rounded px-2 py-0.5">
+                          {job.type}
+                        </span>
+                      ) : null}
                     </div>
-                  </div>
+                  </header>
 
-                  {job.description && (
-                    <p className="text-muted text-sm mb-5">{job.description}</p>
-                  )}
+                  {job.description ? (
+                    <p className="text-theme-muted text-sm mb-4">{job.description}</p>
+                  ) : null}
 
-                  <ul className="grid md:grid-cols-2 gap-x-6 gap-y-3">
-                    {job.highlights.map((item, j) => (
-                      <li key={j} className="flex items-start gap-3 text-sm text-muted">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
+                  <ul className="space-y-3 m-0 p-0 list-none">
+                    {job.highlights.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm text-theme-muted">
+                        <span className="w-1.5 h-1.5 rounded-full bg-theme-accent mt-2 shrink-0" aria-hidden />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              </div>
+                </article>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

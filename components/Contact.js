@@ -1,116 +1,126 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { personalInfo } from '../app/data'
+import { observeReveal } from '../lib/scroll'
 
 export default function Contact() {
   const ref = useRef(null)
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible')
-        })
-      },
-      { threshold: 0.1 }
-    )
-    const elements = ref.current?.querySelectorAll('.animate-on-scroll')
-    elements?.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    return observeReveal(ref.current)
   }, [])
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`)
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`
+  }
+
+  const socialLinks = [
+    { label: 'LinkedIn', href: personalInfo.linkedin, show: Boolean(personalInfo.linkedin) },
+    { label: 'GitHub', href: personalInfo.github, show: Boolean(personalInfo.github) },
+    { label: 'Twitter', href: personalInfo.twitter, show: Boolean(personalInfo.twitter) },
+  ].filter((link) => link.show)
+
   return (
-    <section id="contact" ref={ref} className="py-28 relative overflow-hidden">
-      {/* Big background text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <span className="font-display font-black text-[20vw] text-border/20 whitespace-nowrap leading-none">
-          CONTACT
-        </span>
-      </div>
+    <section id="contact" ref={ref} className="contact py-system-xl relative overflow-hidden" aria-label="Contact">
+      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          <div>
+            <span className="section-tag reveal">Contact</span>
+            <h2 className="heading-lg mb-4 reveal">
+              Let&apos;s build <span className="text-gradient">something great</span>
+            </h2>
+            <p className="text-theme-muted leading-relaxed mb-6 reveal">{personalInfo.summary}</p>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="animate-on-scroll">
-            <span className="section-tag">// Let's Talk</span>
-          </div>
-          <h2 className="heading-lg mb-6 animate-on-scroll">
-            Need a front-end engineer?
-            <br />
-            <span className="text-gradient">Let's talk.</span>
-          </h2>
-          <p className="text-muted text-lg leading-relaxed mb-12 animate-on-scroll">
-            I'm open to senior front-end, React Native, and product engineering roles where clear
-            UI, reliable architecture, and thoughtful execution matter.
-          </p>
-
-          {/* Contact Options */}
-          <div className="grid sm:grid-cols-3 gap-4 mb-12 animate-on-scroll">
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="card-base hover:border-accent/40 flex flex-col items-center gap-3 text-center group transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" strokeWidth="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <polyline points="22,6 12,13 2,6" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted mb-1">Email</p>
-                <p className="font-display font-bold text-sm text-paper group-hover:text-accent transition-colors break-all">
+            <div className="space-y-3 reveal">
+              <p className="text-sm text-theme-muted">
+                <span className="font-mono text-xs uppercase tracking-widest text-theme-accent mr-2">Email</span>
+                <a href={`mailto:${personalInfo.email}`} className="text-theme-text hover:text-theme-accent transition-colors">
                   {personalInfo.email}
+                </a>
+              </p>
+              <p className="text-sm text-theme-muted">
+                <span className="font-mono text-xs uppercase tracking-widest text-theme-accent mr-2">Location</span>
+                {personalInfo.location}
+              </p>
+              {personalInfo.phone ? (
+                <p className="text-sm text-theme-muted">
+                  <span className="font-mono text-xs uppercase tracking-widest text-theme-accent mr-2">Phone</span>
+                  {personalInfo.phone}
                 </p>
-              </div>
-            </a>
-
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-base hover:border-accent/40 flex flex-col items-center gap-3 text-center group transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" strokeWidth="2">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                  <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted mb-1">LinkedIn</p>
-                <p className="font-display font-bold text-sm text-paper group-hover:text-accent transition-colors">
-                  salman-saleem07860
-                </p>
-              </div>
-            </a>
-
-            <div className="card-base flex flex-col items-center gap-3 text-center">
-              <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" strokeWidth="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted mb-1">Location</p>
-                <p className="font-display font-bold text-sm text-paper">{personalInfo.location}</p>
-              </div>
+              ) : null}
             </div>
+
+            {socialLinks.length > 0 ? (
+              <nav className="contact__social flex flex-wrap gap-3 mt-8 reveal" aria-label="Social links">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn--outline text-xs"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+            ) : null}
           </div>
 
-          {/* Main CTA */}
-          <div className="animate-on-scroll">
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="btn-primary text-base py-4 px-10 animate-glow"
-            >
-              Send Me a Message
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-              </svg>
-            </a>
-          </div>
+          <form onSubmit={handleSubmit} className="contact__form glass-card p-6 md:p-8 reveal space-y-5" noValidate>
+            <div>
+              <label htmlFor="contact-name" className="block font-mono text-xs uppercase tracking-widest text-theme-muted mb-2">
+                Name
+              </label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                required
+                autoComplete="name"
+                value={form.name}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                className="w-full rounded-xl border border-theme-border bg-theme-surface-soft px-4 py-3 text-theme-text text-sm focus:outline-none focus:border-theme-accent transition-colors"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-email" className="block font-mono text-xs uppercase tracking-widest text-theme-muted mb-2">
+                Email
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                value={form.email}
+                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                className="w-full rounded-xl border border-theme-border bg-theme-surface-soft px-4 py-3 text-theme-text text-sm focus:outline-none focus:border-theme-accent transition-colors"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-message" className="block font-mono text-xs uppercase tracking-widest text-theme-muted mb-2">
+                Message
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                className="w-full rounded-xl border border-theme-border bg-theme-surface-soft px-4 py-3 text-theme-text text-sm focus:outline-none focus:border-theme-accent transition-colors resize-y min-h-[120px]"
+              />
+            </div>
+            <button type="submit" className="btn btn--primary w-full sm:w-auto">
+              Send Message
+            </button>
+          </form>
         </div>
       </div>
     </section>

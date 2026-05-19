@@ -1,132 +1,141 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { projects } from '../app/data'
+import { observeReveal } from '../lib/scroll'
 
-const categoryColors = {
-  'Web App': 'text-blue-400 bg-blue-400/10 border-blue-400/20',
-  'Mobile App': 'text-purple-400 bg-purple-400/10 border-purple-400/20',
-  SaaS: 'text-green-400 bg-green-400/10 border-green-400/20',
-  'Web & Mobile': 'text-gold bg-gold/10 border-gold/20',
-}
+function ProjectThumb({ name, category }) {
+  const initials = name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase()
 
-function ProjectCard({ project, featured = false }) {
   return (
-    <div
-      className={`project-card card-base group hover:border-accent/40 cursor-default h-full flex flex-col ${
-        featured ? 'bg-surface-soft/90' : ''
-      }`}
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <span
-            className={`font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-md border ${
-              categoryColors[project.category] || 'text-muted bg-muted/10 border-muted/20'
-            }`}
-          >
-            {project.category}
-          </span>
-        </div>
-        {project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted hover:text-accent transition-colors"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="project-arrow transition-transform duration-200"
-            >
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-            </svg>
-          </a>
-        )}
-      </div>
-
-      <h3 className={`${featured ? 'text-2xl' : 'text-xl'} font-display font-black text-paper mb-1 group-hover:text-accent transition-colors duration-200`}>
-        {project.name}
-      </h3>
-      <p className="font-mono text-xs text-muted mb-3">{project.subtitle}</p>
-      <p className="text-muted text-sm leading-relaxed mb-5">{project.description}</p>
-
-      {project.impact && (
-        <div className="mb-5 border-l border-accent/50 pl-4">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-1">
-            Outcome
-          </p>
-          <p className="text-sm text-paper/90 leading-relaxed">{project.impact}</p>
-        </div>
-      )}
-
-      <div className="flex flex-wrap gap-2 mt-auto">
-        {project.tech.map((t) => (
-          <span key={t} className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-border text-muted">
-            {t}
-          </span>
-        ))}
+    <div className="project-card__thumb" aria-hidden>
+      <div className="text-center">
+        <p className="font-display text-2xl font-bold text-gradient mb-1">{initials}</p>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-theme-muted">{category}</p>
       </div>
     </div>
   )
 }
 
+function ProjectCard({ project }) {
+  return (
+    <article className="project-card glass-card p-6 h-full flex flex-col transition-all duration-300">
+      <ProjectThumb name={project.name} category={project.category} />
+
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-theme-accent border border-theme-border rounded px-2 py-0.5">
+          {project.category}
+        </span>
+        {project.featured ? (
+          <span className="font-mono text-[10px] text-theme-muted">Featured</span>
+        ) : null}
+      </div>
+
+      <h3 className="heading-md text-theme-text mb-1">{project.name}</h3>
+      <p className="font-mono text-xs text-theme-muted mb-3">{project.subtitle}</p>
+      <p className="text-theme-muted text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
+
+      {project.impact ? (
+        <p className="text-sm text-theme-text/90 border-l-2 border-theme-accent pl-3 mb-4">{project.impact}</p>
+      ) : null}
+
+      <div className="flex flex-wrap gap-2 mb-5">
+        {project.tech.map((t) => (
+          <span key={t} className="skill-badge text-[10px] py-1">
+            {t}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-3 mt-auto pt-4 border-t border-theme-border">
+        {project.url ? (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--primary text-xs !py-2 !px-4"
+          >
+            Live Demo
+          </a>
+        ) : null}
+        {project.github ? (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--outline text-xs !py-2 !px-4"
+          >
+            GitHub
+          </a>
+        ) : null}
+        {!project.url && !project.github ? (
+          <span className="font-mono text-xs text-theme-muted">Private / NDA</span>
+        ) : null}
+      </div>
+    </article>
+  )
+}
+
 export default function Projects() {
   const ref = useRef(null)
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(projects.map((p) => p.category)))],
+    []
+  )
   const [filter, setFilter] = useState('All')
 
-  const categories = ['All', 'Web App', 'Mobile App', 'SaaS', 'Web & Mobile']
-
-  const filtered =
-    filter === 'All' ? projects : projects.filter((p) => p.category === filter)
+  const filtered = filter === 'All' ? projects : projects.filter((p) => p.category === filter)
 
   useEffect(() => {
-    const elements = ref.current?.querySelectorAll('.animate-on-scroll')
-    if (!elements || elements.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) entry.target.classList.add('visible')
-        }
-      },
-      { threshold: 0.05, rootMargin: '0px 0px -10% 0px' }
-    )
-
-    elements.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    return observeReveal(ref.current)
   }, [])
 
+  useEffect(() => {
+    const root = ref.current
+    if (!root) return
+    const items = root.querySelectorAll('.projects__grid .reveal')
+    items.forEach((el) => {
+      el.classList.remove('reveal--visible')
+    })
+    return observeReveal(root, '.projects__grid .reveal')
+  }, [filter])
+
   return (
-    <section id="projects" ref={ref} className="py-28 relative">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="animate-on-scroll">
-          <span className="section-tag">// Projects</span>
-        </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <h2 className="heading-lg animate-on-scroll">
-            Selected work,
-            <br />
-            <span className="text-gradient">built for real users.</span>
+    <section id="projects" ref={ref} className="projects py-system-xl" aria-label="Projects">
+      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
+        <span className="section-tag reveal">Projects</span>
+
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <h2 className="heading-lg reveal">
+            Selected <span className="text-gradient">work</span>
           </h2>
 
-          {/* Filter */}
-          
+          <div className="projects__filters flex flex-wrap gap-2 reveal" role="tablist" aria-label="Filter projects">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                role="tab"
+                aria-selected={filter === cat}
+                onClick={() => setFilter(cat)}
+                className={`skill-badge cursor-pointer ${filter === cat ? '!border-theme-accent !text-theme-accent !bg-theme-accent/10' : ''}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((project, i) => (
-            <div
-              key={project.name}
-              className={`animate-on-scroll ${filter === 'All' && project.featured && i < 2 ? 'lg:col-span-2' : ''}`}
-              style={{ transitionDelay: `${i * 0.07}s` }}
-            >
-              <ProjectCard project={project} featured={filter === 'All' && project.featured && i < 2} />
+        <div className="projects__grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
+          {filtered.map((project) => (
+            <div key={project.name} className="reveal">
+              <ProjectCard project={project} />
             </div>
           ))}
         </div>

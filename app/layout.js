@@ -1,15 +1,17 @@
-import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
+import { personalInfo } from './data'
 import './globals.css'
+import ThemeScript from '../components/ThemeScript'
 
-const syne = Syne({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-syne',
+  variable: '--font-space-grotesk',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -19,25 +21,47 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+const siteDescription = personalInfo.summary
+
 export const metadata = {
-  title: 'Salman Saleem — Software Engineer',
-  description:
-    'Software Engineer with 5+ years in front-end & mobile development. React.js, React Native, Next.js specialist.',
-  keywords: ['Salman Saleem', 'Software Engineer', 'React.js', 'React Native', 'Next.js', 'Frontend Developer'],
+  title: `${personalInfo.name} — ${personalInfo.title}`,
+  description: siteDescription,
+  keywords: [
+    personalInfo.name,
+    personalInfo.title,
+    personalInfo.subtitle,
+    'Frontend Developer',
+    'React',
+    'Next.js',
+  ],
   icons: {
     icon: '/icon.svg',
   },
   openGraph: {
-    title: 'Salman Saleem — Software Engineer',
-    description: 'Front-End & Mobile Development specialist from Lahore, Pakistan.',
+    title: `${personalInfo.name} — ${personalInfo.title}`,
+    description: siteDescription,
     type: 'website',
+    locale: 'en_US',
+    siteName: personalInfo.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${personalInfo.name} — ${personalInfo.title}`,
+    description: siteDescription,
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
-      <body className="bg-ink text-paper font-body antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="font-body antialiased bg-theme-bg text-theme-text">{children}</body>
     </html>
   )
 }
