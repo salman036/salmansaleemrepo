@@ -1,18 +1,15 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { education, experience, focusAreas, personalInfo, skills, stats } from '../app/data'
+import { education, experience, highlightedSkills, personalInfo, stats } from '../app/data'
 import { observeReveal } from '../lib/scroll'
 
 export default function About() {
   const ref = useRef(null)
   const currentRole = experience[0]
-  const allSkills = Object.values(skills).flat()
-  const uniqueTechCount = new Set(allSkills).size
-
   const statCards = [
     ...stats,
-    { value: String(uniqueTechCount), label: 'Technologies Used' },
+    { value: String(highlightedSkills.length), label: 'Core Technologies' },
   ]
 
   useEffect(() => {
@@ -40,24 +37,18 @@ export default function About() {
               ) : null}
             </p>
 
-            <div className="mt-8 reveal">
-              <p className="font-mono text-xs uppercase tracking-widest text-theme-muted mb-3">Focus areas</p>
+            <motion-bar className="mt-8 reveal">
+              <p className="font-mono text-xs uppercase tracking-widest text-theme-muted mb-3">
+                LinkedIn stack
+              </p>
               <div className="flex flex-wrap gap-2">
-                {focusAreas.map((area) => (
-                  <span key={area} className="skill-badge">
-                    {area}
+                {highlightedSkills.map((skill) => (
+                  <span key={skill} className="skill-badge">
+                    {skill}
                   </span>
                 ))}
               </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-2 reveal">
-              {allSkills.slice(0, 18).map((skill) => (
-                <span key={skill} className="skill-badge text-[11px]">
-                  {skill}
-                </span>
-              ))}
-            </div>
+            </motion-bar>
           </div>
 
           <div className="space-y-6">

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { focusAreas, personalInfo, skills } from '../app/data'
+import { highlightedSkills, personalInfo, skills } from '../app/data'
 import { getInitials } from '../lib/scroll'
 
 const PARTICLE_POSITIONS = [
@@ -13,7 +13,7 @@ const PARTICLE_POSITIONS = [
   { top: '82%', left: '55%', delay: '1.8s' },
 ]
 
-const coreSkills = skills['Core Frontend'] || []
+const coreSkills = skills['Core Stack'] || []
 
 /**
  * @param {string} text
@@ -69,8 +69,12 @@ export default function Hero() {
       <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
           <div className="hero__content">
-            <p className="section-tag flex items-center gap-2">
+            <p className="section-tag flex items-center gap-2 flex-wrap">
               <span className="w-2 h-2 rounded-full bg-theme-accent animate-pulse" aria-hidden />
+              {personalInfo.currentPosition}
+              <span className="text-theme-muted" aria-hidden>
+                ·
+              </span>
               {personalInfo.location}
             </p>
 
@@ -86,9 +90,9 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-2 mb-8">
-              {focusAreas.map((area) => (
-                <span key={area} className="skill-badge">
-                  {area}
+              {highlightedSkills.map((skill) => (
+                <span key={skill} className="skill-badge">
+                  {skill}
                 </span>
               ))}
             </div>

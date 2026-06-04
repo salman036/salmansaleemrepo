@@ -6,12 +6,12 @@ import { observeReveal } from '../lib/scroll'
 import { skillProficiency } from '../lib/skills'
 
 const CATEGORY_ICONS = {
-  'Core Frontend': '⚛',
-  'State & Data': '◈',
-  'UI Frameworks': '▣',
-  'Tools & Infra': '⚙',
+  'Core Stack': '⚛',
+  'UI & Styling': '▣',
+  'Auth & Data': '◈',
+  'Backend & DevOps': '⚙',
   'Testing & QA': '✓',
-  'Backend Touch': '◇',
+  'Mobile & Tools': '◇',
 }
 
 export default function Skills() {

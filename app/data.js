@@ -1,14 +1,31 @@
 export const personalInfo = {
   name: 'Salman Saleem',
-  title: 'Senior Front-End Engineer',
-  subtitle: 'React, Next.js & React Native',
+  title: 'Software Engineer',
+  subtitle: 'React.js · React Native · Next.js · Node.js · Laravel',
   email: 'salmansaleem036@gmail.com',
   phone: '(+92) 03044504408',
   location: 'Lahore, Pakistan',
   linkedin: 'https://www.linkedin.com/in/salman-saleem07860/',
+  currentPosition: 'Developer at Innovative Saudia',
   summary:
-    'Senior front-end engineer with 5+ years building production web and mobile products with React.js, Next.js, React Native, and TypeScript. Experienced in healthcare, travel, fintech, e-commerce, real estate, and SaaS platforms, with a track record of leading teams, improving UX, and shipping maintainable interfaces.',
+    'Software engineer with 5+ years building production web and mobile products across React.js, Next.js, React Native, Node.js, and Laravel. Experienced in healthcare, travel, fintech, e-commerce, real estate, and SaaS—shipping scalable UIs, APIs, and full-stack features with strong attention to UX and code quality.',
 }
+
+/** Core stack highlighted on LinkedIn profile */
+export const highlightedSkills = [
+  'React.js',
+  'React Native',
+  'Next.js',
+  'Node.js',
+  'JavaScript',
+  'Laravel',
+  'Selenium',
+  'Tailwind CSS',
+  'Next Auth',
+  'Ant Design',
+  'UI/UX',
+  'Docker',
+]
 
 export const focusAreas = [
   'Healthcare platforms',
@@ -18,17 +35,17 @@ export const focusAreas = [
 ]
 
 export const skills = {
-  'Core Frontend': ['React.js', 'Next.js', 'React Native', 'HTML', 'CSS'],
-  'State & Data': ['Redux', 'React Query', 'Axios', 'Fetch API', 'REST API'],
-  'UI Frameworks': ['Tailwind CSS', 'MUI', 'Bootstrap', 'Ant Design'],
-  'Tools & Infra': ['Git', 'GitHub', 'Android Studio', 'Beanstalk', 'Laravel'],
+  'Core Stack': ['React.js', 'React Native', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript'],
+  'UI & Styling': ['Tailwind CSS', 'Ant Design', 'MUI', 'Bootstrap', 'UI/UX', 'HTML', 'CSS'],
+  'Auth & Data': ['Next Auth', 'Redux', 'React Query', 'REST API', 'Axios'],
+  'Backend & DevOps': ['Laravel', 'Docker', 'Git', 'GitHub', 'Beanstalk'],
   'Testing & QA': ['Selenium', 'Postman', 'Swagger'],
-  'Backend Touch': ['Flask', 'Laravel', 'jQuery'],
+  'Mobile & Tools': ['Android Studio', 'Flask', 'jQuery'],
 }
 
 export const experience = [
   {
-    role: 'Senior React.js Developer',
+    role: 'Software Engineer',
     company: 'Innovative Saudia',
     period: 'Jan 2026 – Present',
     location: 'Lahore, Pakistan',
@@ -85,7 +102,7 @@ export const experience = [
 export const projects = [
     {
     name: 'HIS — Hospital Information System',
-    subtitle: 'Innovative Saudia · Senior React.js Developer',
+    subtitle: 'Innovative Saudia · Software Engineer',
     description:
       'Full-scale healthcare platform covering org/center setup, service management, physician scheduling, patient workflows, multi-tenant RBAC, runtime localization, and session & activity management. Built from scratch with React.js + TypeScript.',
     tech: ['React.js', 'TypeScript', 'Redux Toolkit', 'Context API', 'RBAC', 'REST APIs'],

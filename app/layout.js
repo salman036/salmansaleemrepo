@@ -30,7 +30,7 @@ export const metadata = {
     personalInfo.name,
     personalInfo.title,
     personalInfo.subtitle,
-    'Frontend Developer',
+    'Software Engineer',
     'React',
     'Next.js',
   ],
