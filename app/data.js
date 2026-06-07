@@ -25,6 +25,7 @@ export const highlightedSkills = [
   'Ant Design',
   'UI/UX',
   'Docker',
+  'Linux',
 ]
 
 export const focusAreas = [
@@ -38,7 +39,7 @@ export const skills = {
   'Core Stack': ['React.js', 'React Native', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript'],
   'UI & Styling': ['Tailwind CSS', 'Ant Design', 'MUI', 'Bootstrap', 'UI/UX', 'HTML', 'CSS'],
   'Auth & Data': ['Next Auth', 'Redux', 'React Query', 'REST API', 'Axios'],
-  'Backend & DevOps': ['Laravel', 'Docker', 'Git', 'GitHub', 'Beanstalk'],
+  'Backend & DevOps': ['Laravel', 'Docker', 'Linux', 'Git', 'GitHub', 'Beanstalk'],
   'Testing & QA': ['Selenium', 'Postman', 'Swagger'],
   'Mobile & Tools': ['Android Studio', 'Flask', 'jQuery'],
 }
