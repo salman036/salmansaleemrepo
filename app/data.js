@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: 'Salman Saleem',
   title: 'Software Engineer',
-  subtitle: 'React.js · React Native · Next.js · Node.js · Laravel',
+  subtitle: 'React.js · React Native · Next.js · Node.js · Laravel · Docker · Linux',
   email: 'salmansaleem036@gmail.com',
   phone: '(+92) 03044504408',
   location: 'Lahore, Pakistan',
@@ -36,7 +36,7 @@ export const focusAreas = [
 ]
 
 export const skills = {
-  'Core Stack': ['React.js', 'React Native', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript'],
+  'Core Stack': ['React.js', 'React Native', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript', 'Linux', 'Docker'],
   'UI & Styling': ['Tailwind CSS', 'Ant Design', 'MUI', 'Bootstrap', 'UI/UX', 'HTML', 'CSS'],
   'Auth & Data': ['Next Auth', 'Redux', 'React Query', 'REST API', 'Axios'],
   'Backend & DevOps': ['Laravel', 'Docker', 'Linux', 'Git', 'GitHub', 'Beanstalk'],
